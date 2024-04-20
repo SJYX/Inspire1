@@ -169,7 +169,7 @@
     </div>
     <div class="button-container">
       <button class="button" onclick="startTx()">TX Start</button>
-      <button class="button" onclick="startTx()">TX Start>TX Stop</button>
+      <button class="button" onclick="stopTx()">TX Stop</button>
     </div>
   </div>
 
@@ -235,7 +235,7 @@
      // TX Stop 按钮点击事件处理程序
   function stopTx() {
     // 发送消息给主进程，执行 TX Stop 操作
-    ipcRenderer.send('stopTx');
+    console.log('stopTx');
   }
 
   
