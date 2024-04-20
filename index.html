@@ -55,8 +55,9 @@
   </style>
 </head>
 <body>
-  <button onclick="showTxTestPage()">TX Test</button>
-  <button onclick="showRxTestPage()">RX Test</button>
+  <script src="script.js"></script>
+  <button onclick="window.TxTest.showTxTestPage()">TX Test</button>
+  <button onclick="window.TxTest.showRxTestPage()">RX Test</button>
 
   <!-- TX Test 页面 -->
   <div id="txTestPage">
@@ -168,8 +169,8 @@
       </div>
     </div>
     <div class="button-container">
-      <button class="button" onclick="startTx()">TX Start</button>
-      <button class="button" onclick="stopTx()">TX Stop</button>
+      <button class="button" onclick="window.TxTest.startTx()">TX Start</button>
+      <button class="button" onclick="window.TxTest.TxStop()">TX Stop</button>      
     </div>
   </div>
 
@@ -181,69 +182,5 @@
     </div>
   </div>
 
-  <script>
-    // 获取页面元素
-    const txTestPage = document.getElementById('txTestPage');
-    const rxTestPage = document.getElementById('rxTestPage');
-
-    // 显示 TX Test 页面，隐藏 RX Test 页面
-    function showTxTestPage() {
-      txTestPage.style.display = 'block';
-      rxTestPage.style.display = 'none';
-    }
-
-    // 显示 RX Test 页面，隐藏 TX Test 页面
-    function showRxTestPage() {
-      txTestPage.style.display = 'none';
-      rxTestPage.style.display = 'block';
-    }
-
-    function startTx() {
-      // 获取各输入项的值
-      const mode = document.getElementById('modeSelect').value;
-      const bandwidth = document.getElementById('bandwidthSelect').value;
-      const rate = document.getElementById('Rate').value;
-      const channel = document.getElementById('channelInput').value;
-      const gi = document.getElementById('giSelect').value;
-      const ltf = document.getElementById('ltfSelect').value;
-      const packetLength = document.getElementById('packetLengthInput').value;
-      const antenna = document.getElementById('antennaInput').value;
-      const transmissionMode = document.getElementById('transmissionModeSelect').value;
-      const power = document.getElementById('powerInput').value;
-      const gain = document.getElementById('gainInput').value;
-      const powerOffset = document.getElementById('PowerOffset').value;
-      const frequencyOffset = document.getElementById('frequencyOffsetInput').value;
-
-
-      // 在这里执行 TX Start 相关的操作，使用上述变量
-      // 例如，可以将这些变量传递给 Electron 主进程，执行相应的操作
-      console.log("Start TX with the following parameters:");
-      console.log("Mode:", mode);
-      console.log("Bandwidth:", bandwidth);
-      console.log("Rate:", rate);
-      console.log("Channel:", channel);
-      console.log("GI:", gi);
-      console.log("LTF:", ltf);
-      console.log("Packet Length:", packetLength);
-      console.log("Antenna:", antenna);
-      console.log("Transmission Mode:", transmissionMode);
-      console.log("Power:", power);
-      console.log("Gain:", gain);
-      console.log("Power Offset:", powerOffset);
-      console.log("Frequency Offset:", frequencyOffset);
-    }
-     // TX Stop 按钮点击事件处理程序
-  function stopTx() {
-    // 发送消息给主进程，执行 TX Stop 操作
-    console.log('stopTx');
-  }
-
-  
-
-    // 在页面加载完成后默认显示 TX Test 页面
-    document.addEventListener('DOMContentLoaded', function() {
-      showTxTestPage();
-    });
-  </script>
 </body>
 </html>
