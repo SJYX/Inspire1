@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electron Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .input-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .input-item {
+      flex-basis: calc(50% - 10px); /* 每行最多放置两个输入框，减去 margin 的宽度 */
+      margin-bottom: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .button {
+      padding: 10px 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      margin: 0 10px;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    .button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <button onclick="showTxTestPage()">TX Test</button>
+  <button onclick="showRxTestPage()">RX Test</button>
+
+  <!-- TX Test 页面 -->
+  <div id="txTestPage">
+    <h1>TX Test</h1>
+    <div class="input-container">
+      <div class="input-item">
+        <label for="modeSelect">Mode:</label>
+        <select id="modeSelect">
+          <option value="a">a</option>
+          <option value="b">b</option>
+          <option value="g">g</option>
+          <option value="n">n</option>
+          <option value="ac">ac</option>
+          <option value="ax">ax</option>
+        </select>
+      </div>
+      <div class="input-item">
+        <label for="bandwidthSelect">Bandwidth:</label>
+        <select id="bandwidthSelect">
+          <option value="20M">20M</option>
+          <option value="40M">40M</option>
+          <option value="80M">80M</option>
+        </select>
+      </div>
+      <div class="input-item">
+        <label for="Rate">Rate:</label>
+        <select id="Rate">
+          <option value="1M">1 Mbps</option>
+          <option value="2M">2 Mbps</option>
+          <option value="5.5M">5.5 Mbps</option>
+          <option value="11M">11 Mbps</option>
+          <option value="6M">6 Mbps</option>
+          <option value="9M">9 Mbps</option>
+          <option value="12M">12 Mbps</option>
+          <option value="18M">18 Mbps</option>
+          <option value="24M">24 Mbps</option>
+          <option value="36M">36 Mbps</option>
+          <option value="48M">48 Mbps</option>
+          <option value="54M">54 Mbps</option>
+          <option value="MCS0">MCS0</option>
+          <option value="MCS1">MCS1</option>
+          <option value="MCS2">MCS2</option>
+          <option value="MCS3">MCS3</option>
+          <option value="MCS4">MCS4</option>
+          <option value="MCS5">MCS5</option>
+          <option value="MCS6">MCS6</option>
+          <option value="MCS7">MCS7</option>
+          <option value="MCS8">MCS8</option>
+          <option value="MCS9">MCS9</option>
+          <option value="MCS10">MCS10</option>
+          <option value="MCS11">MCS11</option>
+        </select>
+      </div>
+      <div class="input-item">
+        <label for="channelInput">Channel:</label>
+        <input type="number" id="channelInput" value="7" min="1" max="14">
+      </div>
+      <div class="input-item">
+        <label for="giSelect">GI:</label>
+        <select id="giSelect">
+          <option value="0.4us">0.4us</option>
+          <option value="0.8us">0.8us</option>
+          <option value="1.6us">1.6us</option>
+          <option value="3.2us">3.2us</option>
+        </select>
+      </div>
+      <div class="input-item">
+        <label for="ltfSelect">LTF:</label>
+        <select id="ltfSelect">
+          <option value="1x">1x</option>
+          <option value="2x">2x</option>
+          <option value="4x">4x</option>
+        </select>
+      </div>
+      <div class="input-item">
+        <label for="packetLengthInput">Packet Length (0-9600):</label>
+        <input type="number" id="packetLengthInput" value="1024" min="0" max="9600">
+      </div>
+      <div class="input-item">
+        <label for="antennaInput">Antenna:</label>
+        <select id="antennaInput">
+          <option value="Chain0">Chain0</option>
+          <option value="Chain1">Chain1</option>
+          <option value="mimo">mimo</option>
+        </select>
+      </div>
+      <div class="input-item">
+        <label for="transmissionModeSelect">Transmission Mode:</label>
+        <select id="transmissionModeSelect">
+          <option value="openLoop">Open Loop</option>
+          <option value="closeLoop">Close Loop</option>
+        </select>
+      </div>
+      <div class="input-item">
+        <label for="powerInput">Power (-10 ~ 25):</label>
+        <input type="number" id="powerInput" value="12" min="-10" max="25">
+      </div>
+      <div class="input-item">
+        <label for="gainInput">Gain (0-84):</label>
+        <input type="number" id="gainInput" value="64" min="0" max="84">
+      </div>
+      <div class="input-item">
+        <label for="PowerOffset">PowerOffset:</label>
+        <input type="number" id="PowerOffset" value="0" min="-70" max="70" step="5">
+      </div>
+      <div class="input-item">
+        <label for="frequencyOffsetInput">Frequency Offset:</label>
+        <input type="number" id="frequencyOffsetInput" value="0" min="-30" max="30">
+      </div>
+    </div>
+    <div class="button-container">
+      <button class="button" onclick="startTx()">TX Start</button>
+      <button class="button" onclick="startTx()">TX Start>TX Stop</button>
+    </div>
+  </div>
+
+  <!-- RX Test 页面 -->
+  <div id="rxTestPage" style="display: none;">
+    <h1>RX Test</h1>
+    <div>
+      <!-- RX 测试界面内容 -->
+    </div>
+  </div>
+
+  <script>
+    // 获取页面元素
+    const txTestPage = document.getElementById('txTestPage');
+    const rxTestPage = document.getElementById('rxTestPage');
+
+    // 显示 TX Test 页面，隐藏 RX Test 页面
+    function showTxTestPage() {
+      txTestPage.style.display = 'block';
+      rxTestPage.style.display = 'none';
+    }
+
+    // 显示 RX Test 页面，隐藏 TX Test 页面
+    function showRxTestPage() {
+      txTestPage.style.display = 'none';
+      rxTestPage.style.display = 'block';
+    }
+
+    function startTx() {
+      // 获取各输入项的值
+      const mode = document.getElementById('modeSelect').value;
+      const bandwidth = document.getElementById('bandwidthSelect').value;
+      const rate = document.getElementById('Rate').value;
+      const channel = document.getElementById('channelInput').value;
+      const gi = document.getElementById('giSelect').value;
+      const ltf = document.getElementById('ltfSelect').value;
+      const packetLength = document.getElementById('packetLengthInput').value;
+      const antenna = document.getElementById('antennaInput').value;
+      const transmissionMode = document.getElementById('transmissionModeSelect').value;
+      const power = document.getElementById('powerInput').value;
+      const gain = document.getElementById('gainInput').value;
+      const powerOffset = document.getElementById('PowerOffset').value;
+      const frequencyOffset = document.getElementById('frequencyOffsetInput').value;
+
+
+      // 在这里执行 TX Start 相关的操作，使用上述变量
+      // 例如，可以将这些变量传递给 Electron 主进程，执行相应的操作
+      console.log("Start TX with the following parameters:");
+      console.log("Mode:", mode);
+      console.log("Bandwidth:", bandwidth);
+      console.log("Rate:", rate);
+      console.log("Channel:", channel);
+      console.log("GI:", gi);
+      console.log("LTF:", ltf);
+      console.log("Packet Length:", packetLength);
+      console.log("Antenna:", antenna);
+      console.log("Transmission Mode:", transmissionMode);
+      console.log("Power:", power);
+      console.log("Gain:", gain);
+      console.log("Power Offset:", powerOffset);
+      console.log("Frequency Offset:", frequencyOffset);
+    }
+     // TX Stop 按钮点击事件处理程序
+  function stopTx() {
+    // 发送消息给主进程，执行 TX Stop 操作
+    ipcRenderer.send('stopTx');
+  }
+
+  
+
+    // 在页面加载完成后默认显示 TX Test 页面
+    document.addEventListener('DOMContentLoaded', function() {
+      showTxTestPage();
+    });
+  </script>
+</body>
+</html>
